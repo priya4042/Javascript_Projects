@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Divs with CSS</title>
+  <style>
+   
+    #a, #b {
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+    }
+
+  
+    div {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="a">
+    <div id="b">
+    </div>
+  </div>
+
+ 
+  <script>
+    function decorateDiv(div) {
+      // This function can be used to add decorations to the div 
+    }
+
+    function appendChildren() {
+      var allDivs = document.getElementsByTagName("div");
+
+      // this array to avoid the infinite loop issue
+      var divArray = Array.from(allDivs);
+
+      
+      // then we call the decorateDiv function to decorate the new div.
+      divArray.forEach(function(currentDiv) {
+        var newDiv = document.createElement("div");
+        currentDiv.appendChild(newDiv);
+        decorateDiv(newDiv);
+      });
+    }
+
+    // call the appendChildren function after the page is loaded
+    window.onload = function() {
+      appendChildren();
+    };
+  </script>
+</body>
+</html>
